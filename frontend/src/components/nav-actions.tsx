@@ -2,21 +2,11 @@
 
 import * as React from "react"
 import {
-  ArrowDown,
-  ArrowUp,
-  Bell,
-  Copy,
-  CornerUpLeft,
-  CornerUpRight,
-  FileText,
-  GalleryVerticalEnd,
-  LineChart,
-  Link,
-  MoreHorizontal,
+  CircleUser,
+  LogOut,
+  Menu,
   Settings2,
   Star,
-  Trash,
-  Trash2,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -34,66 +24,34 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import {ModeToggle} from "@/components/theme/mode-toggle.tsx"
+import axios from "@/axios.config"
+
+const handleLogout = async () => {
+  try {
+    await axios.post("/auth/logout/")
+    window.location.pathname = "/login"
+  } catch (error) {
+    console.error("Logout failed:", error)
+  }
+}
 
 const data = [
   [
     {
-      label: "Customize Page",
+      label: "My Account",
+      icon: CircleUser,
+    },
+    {
+      label: "Settings",
       icon: Settings2,
     },
-    {
-      label: "Turn into wiki",
-      icon: FileText,
-    },
   ],
   [
     {
-      label: "Copy Link",
-      icon: Link,
-    },
-    {
-      label: "Duplicate",
-      icon: Copy,
-    },
-    {
-      label: "Move to",
-      icon: CornerUpRight,
-    },
-    {
-      label: "Move to Trash",
-      icon: Trash2,
-    },
-  ],
-  [
-    {
-      label: "Undo",
-      icon: CornerUpLeft,
-    },
-    {
-      label: "View analytics",
-      icon: LineChart,
-    },
-    {
-      label: "Version History",
-      icon: GalleryVerticalEnd,
-    },
-    {
-      label: "Show delete pages",
-      icon: Trash,
-    },
-    {
-      label: "Notifications",
-      icon: Bell,
-    },
-  ],
-  [
-    {
-      label: "Import",
-      icon: ArrowUp,
-    },
-    {
-      label: "Export",
-      icon: ArrowDown,
+      label: "Log Out",
+      icon: LogOut,
+      onClick: handleLogout,
     },
   ],
 ]
@@ -101,18 +59,12 @@ const data = [
 export function NavActions() {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  React.useEffect(() => {
-    setIsOpen(true)
-  }, [])
-
   return (
     <div className="flex items-center gap-2 text-sm">
-      <div className="text-muted-foreground hidden font-medium md:inline-block">
-        Edit Oct 08
-      </div>
       <Button variant="ghost" size="icon" className="h-7 w-7">
         <Star />
       </Button>
+      <ModeToggle />
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -120,7 +72,7 @@ export function NavActions() {
             size="icon"
             className="data-[state=open]:bg-accent h-7 w-7"
           >
-            <MoreHorizontal />
+            <Menu />
           </Button>
         </PopoverTrigger>
         <PopoverContent
@@ -135,7 +87,7 @@ export function NavActions() {
                     <SidebarMenu>
                       {group.map((item, index) => (
                         <SidebarMenuItem key={index}>
-                          <SidebarMenuButton>
+                          <SidebarMenuButton onClick={item.onClick}>
                             <item.icon /> <span>{item.label}</span>
                           </SidebarMenuButton>
                         </SidebarMenuItem>

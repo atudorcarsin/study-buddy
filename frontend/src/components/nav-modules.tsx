@@ -18,10 +18,10 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 
-export function NavWorkspaces({
-  workspaces,
+export function NavModules({
+  modules,
 }: {
-  workspaces: {
+  modules: {
     name: string
     emoji: React.ReactNode
     pages: {
@@ -32,16 +32,16 @@ export function NavWorkspaces({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Workspaces</SidebarGroupLabel>
+      <SidebarGroupLabel>Modules</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-          {workspaces.map((workspace) => (
-            <Collapsible key={workspace.name}>
+          {modules.map((module) => (
+            <Collapsible key={module.name}>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <a href="#">
-                    <span>{workspace.emoji}</span>
-                    <span>{workspace.name}</span>
+                    <span>{module.emoji}</span>
+                    <span>{module.name}</span>
                   </a>
                 </SidebarMenuButton>
                 <CollapsibleTrigger asChild>
@@ -57,7 +57,7 @@ export function NavWorkspaces({
                 </SidebarMenuAction>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {workspace.pages.map((page) => (
+                    {module.pages.map((page) => (
                       <SidebarMenuSubItem key={page.name}>
                         <SidebarMenuSubButton asChild>
                           <a href="#">
@@ -72,6 +72,7 @@ export function NavWorkspaces({
               </SidebarMenuItem>
             </Collapsible>
           ))}
+
           <SidebarMenuItem>
             <SidebarMenuButton className="text-sidebar-foreground/70">
               <MoreHorizontal />

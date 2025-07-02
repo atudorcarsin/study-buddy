@@ -29,7 +29,7 @@ export default function AppLayout() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbPage className="line-clamp-1">
-                    Project Management & Task Tracking
+                    Home
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>

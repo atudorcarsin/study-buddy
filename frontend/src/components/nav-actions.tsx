@@ -87,7 +87,7 @@ export function NavActions() {
                     <SidebarMenu>
                       {group.map((item, index) => (
                         <SidebarMenuItem key={index}>
-                          <SidebarMenuButton onClick={item.onClick}>
+                          <SidebarMenuButton onClick={'onClick' in item ? item.onClick : undefined}>
                             <item.icon /> <span>{item.label}</span>
                           </SidebarMenuButton>
                         </SidebarMenuItem>

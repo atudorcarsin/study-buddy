@@ -6,4 +6,5 @@ urlpatterns = [
     path('auth/login/', AuthLoginView.as_view(), name='auth_login'),
     path('auth/logout/', AuthLogoutView.as_view(), name='auth_logout'),
     path('auth/status/', AuthStatusView.as_view(), name='auth_status'),
+    path('study_buddy/', include('study_buddy.urls')),
 ]
